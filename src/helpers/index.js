@@ -1,17 +1,20 @@
-// Define unique column keys
-const PATIENT_ID = 'patient_id';
-const PATIENT_NAME = 'patient_name';
-const PATIENT_GENDER = 'patient_gender';
-const PATIENT_AGE = 'patient_age';
-const DOCTOR_ID = 'doctor_id';
-const DOCTOR_NAME = 'doctor_name';
-const APPOINTMENT_ID = 'appointment_id';
-const APPOINTMENT_DATETIME = 'appointment_datetime';
+import moment from 'moment';
+import {
+  PATIENT_ID,
+  PATIENT_NAME,
+  PATIENT_GENDER,
+  PATIENT_AGE,
+  DOCTOR_ID,
+  DOCTOR_NAME,
+  APPOINTMENT_ID,
+  APPOINTMENT_DATETIME,
+} from '../consts';
 
 export const processData = data => {
   const patients = [];
   const doctors = [];
   const appointments = [];
+  const dates = [];
 
   if (Array.isArray(data) && data.length) {
     console.log('=====data', data);
@@ -40,17 +43,26 @@ export const processData = data => {
         doctors.push(newDoctor);
       }
 
-      // NOTE: do not update doctor data if exists! Treat first existed doctor as source of truth
+      // NOTE: do not update appointment data if exists! Treat first existed appointment as source of truth
       const shouldAddAppointment = datum[APPOINTMENT_ID]
         && !appointments.find(d => d.id === datum[APPOINTMENT_ID]);
       if (shouldAddAppointment) {
+        const formatDatetime = datum[APPOINTMENT_DATETIME]
+          && moment(datum[APPOINTMENT_DATETIME], 'DDMMYYYY HH:mm:ss').toISOString();
         const newAppointment = {
           id: datum[APPOINTMENT_ID],
-          datetime: datum[APPOINTMENT_DATETIME],
+          datetime: formatDatetime,
           doctor_id: datum[DOCTOR_ID],
           patient_id: datum[PATIENT_ID],
         }
         appointments.push(newAppointment);
+      }
+
+      const newDate = datum[APPOINTMENT_DATETIME]
+        && moment(datum[APPOINTMENT_DATETIME], 'DDMMYYYY').format('YYYY-MM-DD');
+      const shouldAddDate = newDate && !dates.find(d => d === newDate);
+      if (shouldAddDate) {
+        dates.push(newDate);
       }
     })
   }
@@ -59,5 +71,20 @@ export const processData = data => {
     patients,
     doctors,
     appointments,
+    dates,
   }
+}
+
+export const getDoctorById = (doctors, id) => {
+  if (!doctors?.length || !id) {
+    return '';
+  }
+  return doctors.find(doc => doc.id === id) || '';
+}
+
+export const getPatientById = (patients, id) => {
+  if (!patients?.length || !id) {
+    return '';
+  }
+  return patients.find(pat => pat.id === id) || '';
 }

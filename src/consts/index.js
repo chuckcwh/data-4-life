@@ -1,0 +1,9 @@
+// Define unique column keys
+export const PATIENT_ID = 'patient_id';
+export const PATIENT_NAME = 'patient_name';
+export const PATIENT_GENDER = 'patient_gender';
+export const PATIENT_AGE = 'patient_age';
+export const DOCTOR_ID = 'doctor_id';
+export const DOCTOR_NAME = 'doctor_name';
+export const APPOINTMENT_ID = 'appointment_id';
+export const APPOINTMENT_DATETIME = 'appointment_datetime';

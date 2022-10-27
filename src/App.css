@@ -42,3 +42,10 @@
   width: 400px;
   border-radius: 5px;
 }
+
+.flex-row-center {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}

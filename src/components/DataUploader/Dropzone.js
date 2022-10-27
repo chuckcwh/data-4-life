@@ -24,12 +24,12 @@ function MyDropzone(props) {
         csvRows.forEach((row, i) => {
 
           if (i !== 0) {
-            const builtObject = {}
+            const builtObject = {};
 
             Object.keys(row).forEach((rowKey) => {
-              const valueToAddInBuiltObject = row[rowKey];
-              const keyToAddInBuiltObject = csvRows[0][rowKey];
-              builtObject[keyToAddInBuiltObject] = valueToAddInBuiltObject;
+              const val = row[rowKey];
+              const key = csvRows[0][rowKey].trim();
+              builtObject[key] = val;
             })
 
             toJson.push(builtObject)
@@ -43,12 +43,14 @@ function MyDropzone(props) {
   };
 
   return (
-    <Dropzone onDrop={onDrop}>
+    <Dropzone onDrop={onDrop} multiple={false}>
       {({getRootProps, getInputProps}) => (
         <section>
           <div {...getRootProps({ className: 'dropzone' })}>
             <input {...getInputProps()} />
-            <p>Drag 'n' drop some files here, or click to select files</p>
+            <p style={{ marginTop: 15 }}>
+              Drag & drop CSV here, or click to select CSV
+            </p>
           </div>
         </section>
       )}
