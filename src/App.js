@@ -1,11 +1,27 @@
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+
 import DataUploader from './components/DataUploader';
+import { processData } from './helpers';
 
 function App() {
+
+  const [patients, setPatients] = useState([]);
+  const [doctors, setDoctors] = useState([]);
+  const [appointments, setAppointments] = useState([]);
+
+  const onDataLoad = (data) => {
+    const { patients, doctors, appointments } = processData(data);
+    console.log({ patients, doctors, appointments });
+    setPatients(patients);
+    setDoctors(doctors);
+    setAppointments(appointments);
+  }
+
   return (
     <div className="App">
-      <DataUploader />
+      <DataUploader onLoad={onDataLoad} />
       {/*
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
@@ -22,7 +38,6 @@ function App() {
           </a>
         </header>
       */}
-
     </div>
   );
 }

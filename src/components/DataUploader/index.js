@@ -6,10 +6,10 @@ function DataUploader(props) {
   return (
     <div>
       <Dropzone
-        onDrop={json => console.log('=====json', json)}
+        onDrop={props.onLoad}
       />
       <DefaultUpload
-        onPress={json => console.log('=====json', json)}
+        onPress={props.onLoad}
       />
     </div>
   )
