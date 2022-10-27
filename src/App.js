@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
 import moment from 'moment';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
