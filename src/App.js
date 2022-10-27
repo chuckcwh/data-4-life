@@ -107,6 +107,13 @@ function App() {
       />
 
       <Profile
+        header="Patient Profile"
+        data={patientProfile}
+      />
+
+      <Profile
+        header="Doctor Profile"
+        data={doctorProfile}
       />
     </div>
   );
