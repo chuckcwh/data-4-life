@@ -42,7 +42,7 @@ function AppointmentTable(props) {
       />
 
       <div style={{ margin: 20 }}>
-        <div>Appointments</div>
+        <div className="title">Appointments</div>
         <Table striped bordered hover>
           <thead>
             <tr>

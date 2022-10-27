@@ -43,7 +43,11 @@ function MyDropzone(props) {
   };
 
   return (
-    <Dropzone onDrop={onDrop} multiple={false}>
+    <Dropzone
+      onDrop={onDrop}
+      multiple={false}
+      accept={{ 'text/*': ['.csv'] }}
+    >
       {({getRootProps, getInputProps}) => (
         <section>
           <div {...getRootProps({ className: 'dropzone' })}>

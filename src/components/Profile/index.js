@@ -10,7 +10,7 @@ function Profile(props) {
 
   return (
     <section style={{ margin: 20 }}>
-      <div>{props.header}</div>
+      <div className="title">{props.header}</div>
 
       <Table striped bordered hover>
         <thead>
