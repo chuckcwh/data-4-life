@@ -33,6 +33,8 @@ function AppointmentTable(props) {
 
   return (
     <section style={{ marginTop: 20 }}>
+      <div className="title">Appointments</div>
+
       <Filters
         selected={props.filters}
         doctors={props.doctors}
@@ -42,7 +44,6 @@ function AppointmentTable(props) {
       />
 
       <div style={{ margin: 20 }}>
-        <div className="title">Appointments</div>
         <Table striped bordered hover>
           <thead>
             <tr>
